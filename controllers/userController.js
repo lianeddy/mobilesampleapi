@@ -26,10 +26,12 @@ module.exports = {
           [username, hash]
         );
       let response;
+      let statusCode;
       users.length !== 0
         ? (response = { ...users[0], token: createToken(users[0]) })
-        : (response = { message: "Not found" });
-      return res.status(200).send(response);
+        : (response = { message: "user not found" });
+      response.message ? (statusCode = 404) : (statusCode = 200);
+      return res.status(statusCode).send(response);
     } catch (err) {
       next(err);
     }
