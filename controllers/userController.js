@@ -29,8 +29,8 @@ module.exports = {
       let statusCode;
       users.length !== 0
         ? (response = { ...users[0], token: createToken(users[0]) })
-        : (response = { message: "user not found" });
-      response.message ? (statusCode = 404) : (statusCode = 200);
+        : (response = { error: "user not found" });
+      response.error ? (statusCode = 404) : (statusCode = 200);
       return res.status(statusCode).send(response);
     } catch (err) {
       next(err);

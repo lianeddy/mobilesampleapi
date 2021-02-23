@@ -23,10 +23,9 @@ const registerValidator = [
       });
   }),
   body("password")
-    .matches(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/, "i")
-    .withMessage(
-      "Password must contain 8 characters, a special character, and an uppercase letter"
-    ),
+    .isLength({ min: 8 })
+    // .matches(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/, "i")
+    .withMessage("Password must contain 8 characters"),
   (req, res, next) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
