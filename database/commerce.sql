@@ -58,7 +58,7 @@ CREATE TABLE `cart` (
   KEY `cart_user_fk_idx` (`userID`),
   CONSTRAINT `cart_product_fk` FOREIGN KEY (`productID`) REFERENCES `products` (`id`),
   CONSTRAINT `cart_user_fk` FOREIGN KEY (`userID`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -67,6 +67,7 @@ CREATE TABLE `cart` (
 
 LOCK TABLES `cart` WRITE;
 /*!40000 ALTER TABLE `cart` DISABLE KEYS */;
+INSERT INTO `cart` VALUES (1,1,4,4),(2,2,4,25);
 /*!40000 ALTER TABLE `cart` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -115,7 +116,7 @@ CREATE TABLE `productimage` (
 
 LOCK TABLES `productimage` WRITE;
 /*!40000 ALTER TABLE `productimage` DISABLE KEYS */;
-INSERT INTO `productimage` VALUES (1,3,'/products/PRD1613811845437.jpeg'),(2,3,'/products/PRD1613811862168.jpeg'),(3,1,'/products/PRD1613811886459.jpeg'),(4,1,'/products/PRD1613811896436.jpeg'),(5,2,'/products/PRD1613811914684.jpeg'),(6,2,'/products/PRD1613811921489.jpeg');
+INSERT INTO `productimage` VALUES (1,3,'/products/PRD1613811914684.jpeg'),(2,3,'/products/PRD1613811921489.jpeg'),(3,1,'/products/PRD1613811862168.jpeg'),(4,1,'/products/PRD1613811845437.jpeg'),(5,2,'/products/PRD1613811886459.jpeg'),(6,2,'/products/PRD1613811896436.jpeg');
 /*!40000 ALTER TABLE `productimage` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -189,7 +190,7 @@ CREATE TABLE `users` (
   PRIMARY KEY (`id`),
   KEY `role_id_fk_idx` (`roleID`),
   CONSTRAINT `role_id_fk` FOREIGN KEY (`roleID`) REFERENCES `roles` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -198,7 +199,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (4,'lian','87df8f9318eb2a17f2c839bedff7907f9f9f606dd330f194446dd42423c8026b','lian@mail.com',2);
+INSERT INTO `users` VALUES (4,'lian','87df8f9318eb2a17f2c839bedff7907f9f9f606dd330f194446dd42423c8026b','lian@mail.com',2),(15,'lianeddy','d65648f55304bcc601de243918d68422ef6a70b498042392008b7955ffde1620','bambang@gmail.com',2),(16,'pwdkjc1504','8bb5a09e25af01731c49235022e0642df61dbb97fd134676fb29dd23d4c377f4','pwdkjc1504@gmail.com',2),(17,'pwdkjc15041','8bb5a09e25af01731c49235022e0642df61dbb97fd134676fb29dd23d4c377f4','pwdkjc1504@gmailo.com',2),(18,'bambang','8bb5a09e25af01731c49235022e0642df61dbb97fd134676fb29dd23d4c377f4','bambang@mail.com',2),(19,'derick','8bb5a09e25af01731c49235022e0642df61dbb97fd134676fb29dd23d4c377f4','derick@gmail.com',2),(20,'liane','8bb5a09e25af01731c49235022e0642df61dbb97fd134676fb29dd23d4c377f4','lian@ymail.com',2),(21,'pwdk1504','8bb5a09e25af01731c49235022e0642df61dbb97fd134676fb29dd23d4c377f4','pwdk1504@gmail.com',2);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -211,4 +212,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-02-22  9:13:57
+-- Dump completed on 2021-02-24 15:22:40
