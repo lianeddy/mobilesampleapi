@@ -7,7 +7,7 @@ const path = "/products";
 const upload = pify(uploader(path, "PRD").fields([{ name: "image" }]));
 
 const getProducts =
-  "select p.id, p.price, p.description, p.isAvailable, c.category from products p join categories c on c.id = p.categoryID";
+  "select p.id, p.name, p.price, p.description, p.isAvailable, c.category from products p join categories c on c.id = p.categoryID";
 
 module.exports = {
   insertProduct: async (req, res, next) => {
