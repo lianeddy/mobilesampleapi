@@ -62,4 +62,25 @@ module.exports = {
       next(err);
     }
   },
+  getProductByID: async (req, res, next) => {
+    try {
+      const [product] = await con
+        .promise()
+        .query(getProducts + " where p.id = ?", [req.params.id]);
+      const [
+        productImage,
+      ] = await con
+        .promise()
+        .query("select * from productimage where productID = ?", [
+          req.params.id,
+        ]);
+      const response = {
+        ...product[0],
+        image: productImage,
+      };
+      return res.status(200).send(response);
+    } catch (err) {
+      next(err);
+    }
+  },
 };

@@ -1,5 +1,10 @@
 const {
-  productController: { insertProduct, insertProductPhoto, getProducts },
+  productController: {
+    insertProduct,
+    insertProductPhoto,
+    getProducts,
+    getProductByID,
+  },
 } = require("../controllers");
 const {
   uploader,
@@ -19,5 +24,6 @@ router.post(
   insertProductPhoto
 );
 router.get("/", getProducts);
+router.get("/:id", getProductByID);
 
 module.exports = router;
