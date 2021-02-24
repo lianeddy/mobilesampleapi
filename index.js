@@ -2,7 +2,7 @@ const express = require("express");
 const app = express();
 const cors = require("cors");
 const bodyParser = require("body-parser");
-const { userRouter, productRouter } = require("./routers");
+const { userRouter, productRouter, cartRouter } = require("./routers");
 const { errorHandler } = require("./handlers");
 const bearerToken = require("express-bearer-token");
 
@@ -17,6 +17,7 @@ app.get("/", (req, res) => {
 
 app.use("/user", userRouter);
 app.use("/product", productRouter);
+app.use("/cart", cartRouter);
 
 app.use(errorHandler);
 
