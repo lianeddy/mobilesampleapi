@@ -54,4 +54,14 @@ module.exports = {
       next(err);
     }
   },
+  deleteCartById: async (req, res, next) => {
+    try {
+      await con
+        .promise()
+        .query(`delete from cart where id = ?`, [req.params.id]);
+      return res.status(200).send({ id: req.params.id, status: "deleted" });
+    } catch (err) {
+      next(err);
+    }
+  },
 };
