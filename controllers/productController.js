@@ -39,9 +39,10 @@ module.exports = {
     }
   },
   getProducts: async (req, res, next) => {
-    const { category, minPrice, maxPrice } = req.query;
+    const { category, minPrice, maxPrice, name } = req.query;
     try {
       let whereClause = " where isAvailable = 1";
+      name ? (whereClause += ` and p.name like '%${name}%'`) : null;
       category ? (whereClause += ` and c.category = '${category}'`) : null;
       minPrice ? (whereClause += ` and p.price > ${minPrice}`) : null;
       maxPrice ? (whereClause += ` and p.price < ${maxPrice}`) : null;
