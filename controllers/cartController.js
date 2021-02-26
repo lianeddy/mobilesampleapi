@@ -20,10 +20,21 @@ module.exports = {
       ] = await con
         .promise()
         .query(
-          "select c.id, p.name, c.quantity, p.price, p.isAvailable from cart c join products p on p.id = c.productID where c.userID = ?;",
+          "select c.id, p.name, c.quantity, p.price, p.id as productID, p.isAvailable from cart c join products p on p.id = c.productID where c.userID = ?;",
           [req.params.id]
         );
-      return res.status(200).send(cart);
+      const [productImage] = await con
+        .promise()
+        .query(`select * from productimage`);
+      const response = cart.map((val) => {
+        return {
+          ...val,
+          image: productImage.filter((item) => {
+            return item.productID === val.productID;
+          }),
+        };
+      });
+      return res.status(200).send(response);
     } catch (err) {
       next(err);
     }
