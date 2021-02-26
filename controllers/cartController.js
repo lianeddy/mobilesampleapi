@@ -64,4 +64,18 @@ module.exports = {
       next(err);
     }
   },
+  emptyCartByUserID: async (req, res, next) => {
+    try {
+      const [
+        carts,
+      ] = await con
+        .promise()
+        .query(`select id from cart where userID = ?`, [req.params.id]);
+      const ids = carts.map((val) => val.id);
+      await con.promise().query(`delete from cart where id in ?`, [[ids]]);
+      return res.status(200).send({ id: req.params.id, status: "deleted" });
+    } catch (err) {
+      next(err);
+    }
+  },
 };
