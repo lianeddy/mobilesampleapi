@@ -68,11 +68,53 @@ module.exports = {
         .query(`select id, username, email, roleID from users where id = ?`, [
           id,
         ]);
+
+      const [
+        address,
+      ] = await con
+        .promise()
+        .query(`select id, address from address where userID = ?`, [id]);
       const response = {
         ...user[0],
+        address,
         token: req.token,
       };
       return res.status(200).send(response);
+    } catch (err) {
+      next(err);
+    }
+  },
+  getAddressbyID: async (req, res, next) => {
+    try {
+      const [
+        address,
+      ] = await con
+        .promise()
+        .query(`select id, address from address where userID = ?`, [
+          req.params.id,
+        ]);
+      return res.status(200).send(address);
+    } catch (err) {
+      next(err);
+    }
+  },
+  addAddressUser: async (req, res, next) => {
+    try {
+      const body = { ...req.body, userID: req.params.id };
+      const response = await con
+        .promise()
+        .query(`insert into address set ?`, [body]);
+      return res.status(500).send({ id: response.insertId, status: "created" });
+    } catch (err) {
+      next(err);
+    }
+  },
+  editAddressUser: async (req, res, next) => {
+    try {
+      await con
+        .promise()
+        .query(`update address set ? where id = ?`, [req.params.id]);
+      return res.status(200).send({ id: req.params.id, status: "edited" });
     } catch (err) {
       next(err);
     }
