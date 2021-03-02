@@ -14,6 +14,7 @@ const bearerToken = require("express-bearer-token");
 app.use(express.static("public"));
 app.use(cors());
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bearerToken());
 
 app.get("/", (req, res) => {

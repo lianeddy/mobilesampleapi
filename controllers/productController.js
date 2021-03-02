@@ -26,12 +26,15 @@ module.exports = {
     try {
       await upload(req, res);
       const [
+        insertProduct,
+      ] = await con.promise().query(`insert into products set ? `, [req.body]);
+      const [
         insertPhoto,
       ] = await con
         .promise()
         .query(`insert into productimage (imagepath, productID) values (?,?)`, [
           `${path}/${req.files.image[0].filename}`,
-          req.body.productID,
+          insertProduct.insertId,
         ]);
       return res.status(200).send("success");
     } catch (err) {
